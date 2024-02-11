@@ -2,18 +2,17 @@
 
 class Conta
 {
-    private int $saldo;
-    private string $titular;
-    private string $cpf;
+    private Titular $titular;
+    private int $saldo = 0;
+    private static $numeroDeContas; //atributo da classe
 
-    public function __construct(string $nome, string $cpf)
+    public function __construct(Titular $titular)
     {
-        $this->saldo = 0;
-        $this->titular = $nome;
-        $this->cpf = $cpf;
+        $this->titular = $titular;
+        Conta::$numeroDeContas++;
     }
 
-    public function getSaldo(): Int
+    public function recuperarSaldo(): Int
     {
         return $this->saldo; 
     }
@@ -34,7 +33,8 @@ class Conta
             echo 'Não é possível sacar um valor menor/igual a zero!' . PHP_EOL;
             return;
         } 
-            $this->saldo -= $valor;
+        
+        $this->saldo -= $valor;
     }
 
     public function transferir(float $valorASerTransferido, Conta $contaDestino): void
@@ -44,14 +44,33 @@ class Conta
             echo 'Saldo indisponível!' . PHP_EOL;
             return;
         }
-            $this->sacar($valorASerTransferido);
-            $contaDestino->depositar($valorASerTransferido);
+
+        $this->sacar($valorASerTransferido);
+        $contaDestino->depositar($valorASerTransferido);
+    }
+
+    public function recuperaTitular(): string
+    {
+        return $this->titular->recuperaNome();
+    }
+
+    public function recuperaCpf(): string
+    {
+        return $this->titular->recuperaCpf();
     }
 
     public function exibirDadosDaConta(){
         echo "saldo: " . $this->saldo . PHP_EOL;
-        echo "titular: " . $this->titular . PHP_EOL;
-        echo "numero da conta: " . $this->cpf . PHP_EOL;
+    }
+
+    public static function retornaNumeroDeContas(): int
+    {
+        return Conta::$numeroDeContas;
+    }
+
+    public function __destruct()
+    {
+        self::$numeroDeContas--;
     }
 }
 
