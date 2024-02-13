@@ -49,16 +49,6 @@ class Conta
         $contaDestino->depositar($valorASerTransferido);
     }
 
-    public function recuperaTitular(): string
-    {
-        return $this->titular->recuperaNome();
-    }
-
-    public function recuperaCpf(): string
-    {
-        return $this->titular->recuperaCpf();
-    }
-
     public function exibirDadosDaConta(){
         echo "saldo: " . $this->saldo . PHP_EOL;
     }
