@@ -2,11 +2,12 @@
 
 class Pessoa
 {
-    public string $nome;
-    public CPF $cpf;
+    protected string $nome;
+    protected CPF $cpf;
 
     public function __construct(string $nome, CPF $cpf)
     {
+        $this->validaNome($nome);
         $this->nome = $nome;
         $this->cpf = $cpf;
     }
@@ -19,12 +20,12 @@ class Pessoa
         }
     }
 
-    public function retornaNome(): string
+    public function recuperaNome(): string
     {
         return $this->nome; 
     }
 
-    public function retornaCPF(): string
+    public function recuperaCPF(): string
     {
         return $this->cpf->recuperaCpf();
     }

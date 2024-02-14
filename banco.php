@@ -2,6 +2,7 @@
 
 require_once 'src/Conta.php';
 require_once 'src/Titular.php';
+require_once 'src/Funcionario.php';
 require_once 'src/Cpf.php';
 require_once 'src/Endereco.php';
 
@@ -14,5 +15,7 @@ $enderecoFernanda = new Endereco('Araras', 'Pq. das Árvores', 'Revarie Baraldi 
 $fernanda = new Titular('Fernanda', new CPF('123.833.043-78'), $enderecoFernanda);
 $segundaConta = new Conta($fernanda);
 $segundaConta->depositar(50034);
+
+echo $fernanda->recuperaNome() . PHP_EOL;
 
 echo $segundaConta::retornaNumeroDeContas() . PHP_EOL;
