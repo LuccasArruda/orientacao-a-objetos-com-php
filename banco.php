@@ -1,10 +1,15 @@
 <?php
 
-require_once 'src/Conta.php';
-require_once 'src/Titular.php';
-require_once 'src/Funcionario.php';
-require_once 'src/Cpf.php';
-require_once 'src/Endereco.php';
+require_once 'src/Modelo/Conta/Conta.php';
+require_once 'src/Modelo/Endereco.php';
+require_once 'src/Modelo/Conta/Titular.php';
+require_once 'src/Modelo/Pessoa.php';
+require_once 'src/Modelo/Cpf.php';
+
+use Alura\Banco\Modelo\Conta\Titular;
+use Alura\Banco\Modelo\Endereco;
+use Alura\Banco\Modelo\CPF;
+use Alura\Banco\Modelo\Conta\Conta;
 
 $enderecoLuccas = new Endereco('Araras', 'Rua aparecida', 'Luciano Grebásio', '123');
 $luccas = new Titular('Luccas', new CPF('492.215.345-03'), $enderecoLuccas);
