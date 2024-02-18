@@ -2,10 +2,10 @@
 
 namespace Alura\Banco\Modelo\Conta;
 
-class Conta
+abstract class Conta
 {
     private Titular $titular;
-    private int $saldo = 0;
+    protected int $saldo = 0;
     private static $numeroDeContas; //atributo da classe
 
     public function __construct(Titular $titular)
@@ -29,30 +29,23 @@ class Conta
         $this->saldo += $valor;
     }
 
-    public function sacar(float $valor){
-        if ($valor <= 0) 
-        {   
-            echo 'Não é possível sacar um valor menor/igual a zero!' . PHP_EOL;
-            return;
-        } 
-        
-        $this->saldo -= $valor;
-    }
-
-    public function transferir(float $valorASerTransferido, Conta $contaDestino): void
+    public function sacar(float $valorASacar)
     {
-        if($valorASerTransferido > $this->saldo)
-        {
-            echo 'Saldo indisponível!' . PHP_EOL;
+        $tarifaDeSaque = $valorASacar * $this->percentualTarifa();
+        $valorASacar += $tarifaDeSaque;
+        if ($valorASacar <= 0) {
+            echo 'Não é possível sacar um valor menor/igual a zero!' . PHP_EOL;
             return;
         }
 
-        $this->sacar($valorASerTransferido);
-        $contaDestino->depositar($valorASerTransferido);
-    }
+        $this->saldo -= $valorASacar;
+    } 
+
+    abstract protected function percentualTarifa(): float;
 
     public function exibirDadosDaConta(){
         echo "saldo: " . $this->saldo . PHP_EOL;
+        echo "nome do titular: " . $this->titular->recuperaNome() . PHP_EOL;
     }
 
     public static function retornaNumeroDeContas(): int
