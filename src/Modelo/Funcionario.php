@@ -29,7 +29,7 @@ class Funcionario extends Pessoa
         $this->nome = $nome;
     }
 
-    public function bonificacao(): float{
+    public function calculaBonificacao(): float{
         return $this->salario *= 0.01;
     }
 }
