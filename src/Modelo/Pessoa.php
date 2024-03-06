@@ -4,6 +4,8 @@ namespace Alura\Banco\Modelo;
 
 class Pessoa
 {
+    use AcessoPropriedadesPrivadas;
+
     protected string $nome;
     protected CPF $cpf;
 
@@ -14,7 +16,7 @@ class Pessoa
         $this->cpf = $cpf;
     }
 
-    public function validaNome(string $nome)
+    final public function validaNome(string $nome)
     {
         if (strlen($nome) < 5) {
             echo 'O Nome deve ter pelo menos 5 caractéres';
